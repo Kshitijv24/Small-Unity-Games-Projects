@@ -891,6 +891,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   snakeSegmentsPrefab: {fileID: 5293257278970805347, guid: 7bcafc38979237249ac0668b266dd3b7, type: 3}
+  initialSize: 4
 --- !u!1 &2128054519
 GameObject:
   m_ObjectHideFlags: 0
