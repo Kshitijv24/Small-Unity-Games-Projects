@@ -6,6 +6,11 @@ public class Pillars : MonoBehaviour
 
     private void Update()
     {
+        MovingPillarsLeft();
+    }
+
+    private void MovingPillarsLeft()
+    {
         transform.Translate(Vector2.left * moveSpeed * Time.deltaTime);
     }
 }

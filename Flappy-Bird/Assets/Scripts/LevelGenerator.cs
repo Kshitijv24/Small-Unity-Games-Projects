@@ -15,7 +15,8 @@ public class LevelGenerator : MonoBehaviour
     {
         while (true)
         {
-            Instantiate(pillarPrefab, transform.position, transform.rotation);
+            Vector2 randomSpawnPosition = new Vector2(0, Random.Range(0, 5));
+            Instantiate(pillarPrefab, randomSpawnPosition, transform.rotation);
             yield return new WaitForSeconds(nextPillarSpawnDelay);
         }
     }
