@@ -5,12 +5,10 @@ public class BirdMovement : MonoBehaviour
 {
     [SerializeField] int moveAmount;
 
-    Camera mainCamera;
     Rigidbody2D rb;
 
     private void Start()
     {
-        mainCamera = Camera.main;
         rb = GetComponent<Rigidbody2D>();
     }
 
