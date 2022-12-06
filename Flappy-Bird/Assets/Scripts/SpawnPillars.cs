@@ -8,9 +8,4 @@ public class SpawnPillars : MonoBehaviour
     {
         Instantiate(pillarPrefab, transform.position, Quaternion.identity);
     }
-
-    private void Update()
-    {
-        
-    }
 }

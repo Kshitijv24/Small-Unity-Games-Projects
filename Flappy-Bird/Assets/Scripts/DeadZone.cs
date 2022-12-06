@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DeadZone : MonoBehaviour
 {
@@ -7,6 +8,10 @@ public class DeadZone : MonoBehaviour
         if(collision.gameObject.tag == "Pillars")
         {
             Destroy(collision.gameObject);
+        }
+        else if(collision.gameObject.tag == "Bird")
+        {
+            SceneManager.LoadScene(0);
         }
     }
 }
