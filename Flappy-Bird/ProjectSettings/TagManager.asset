@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Pillars
   - Bird
+  - Pickup
   layers:
   - Default
   - TransparentFX

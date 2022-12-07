@@ -4,7 +4,8 @@ using UnityEngine;
 public class LevelGenerator : MonoBehaviour
 {
     [SerializeField] GameObject pillarPrefab;
-    [SerializeField] float nextPillarSpawnDelay;
+    
+    public float nextPillarSpawnDelay;
 
     private void Start()
     {

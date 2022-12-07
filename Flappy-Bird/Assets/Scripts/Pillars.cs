@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Pillars : MonoBehaviour
 {
-    [SerializeField] int moveSpeed;
+    public static int moveSpeed = 2;
 
     private void Update()
     {
