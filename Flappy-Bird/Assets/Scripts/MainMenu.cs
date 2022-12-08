@@ -11,11 +11,6 @@ public class MainMenu : MonoBehaviour
     private void Update()
     {
         highScoreText.text = "HighScore: " + PlayerPrefs.GetInt(highScoreKey, 0);
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
     }
 
     public void PlayGame()

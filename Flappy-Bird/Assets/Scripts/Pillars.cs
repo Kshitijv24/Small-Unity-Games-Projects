@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class Pillars : MonoBehaviour
 {
-    public static int moveSpeed = 2;
+    public static float moveSpeed = 2;
+    [SerializeField] float maxMoveSpeed = 6;
 
     private void Update()
     {
@@ -11,6 +12,11 @@ public class Pillars : MonoBehaviour
 
     private void MovingPillarsLeft()
     {
+        if(moveSpeed < maxMoveSpeed)
+        {
+            moveSpeed += 0.01f * Time.deltaTime;
+        }
+
         transform.Translate(Vector2.left * moveSpeed * Time.deltaTime);
     }
 

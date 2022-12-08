@@ -1,14 +1,13 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class BirdMovement : MonoBehaviour
 {
     [SerializeField] int moveAmount;
 
     Rigidbody2D rb;
-    float timerLength = 2f;
-    float timePassed = 0f;
 
     private void Start()
     {
@@ -32,26 +31,13 @@ public class BirdMovement : MonoBehaviour
     {
         if(collision.gameObject.tag == "Pillars")
         {
-            SceneManager.LoadScene(0);
+            GameEnd();
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void GameEnd()
     {
-        if (collision.gameObject.tag == "Pickup")
-        {
-            timePassed += Time.deltaTime;
-            if(timePassed >= timerLength)
-            {
-                timePassed = 0f;
-                Pillars.moveSpeed = 5;
-                FindObjectOfType<LevelGenerator>().nextPillarSpawnDelay = 1;
-            }
-            else
-            {
-                Pillars.moveSpeed = 2;
-                FindObjectOfType<LevelGenerator>().nextPillarSpawnDelay = 2;
-            }
-        }
+        SceneManager.LoadScene(0);
+        Pillars.moveSpeed = 2;
     }
 }
