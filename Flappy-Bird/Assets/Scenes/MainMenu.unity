@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 46841640}
   - component: {fileID: 46841639}
   m_Layer: 5
-  m_Name: Flappy Bird Avanced Text (TMP)
+  m_Name: Flappy Bird Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -158,7 +158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -477}
+  m_AnchoredPosition: {x: 0, y: -871}
   m_SizeDelta: {x: 1000.3234, y: 258.5088}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &46841639
@@ -181,7 +181,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Flappy Bird Advanced
+  m_text: 'Flappy Bird
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -790,7 +792,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -301}
+  m_AnchoredPosition: {x: 0, y: -663}
   m_SizeDelta: {x: 1000.3234, y: 258.5088}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1295255001
@@ -1011,7 +1013,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 301.02112}
+  m_AnchoredPosition: {x: 0, y: 1608}
   m_SizeDelta: {x: 433.7778, y: 235.1521}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1633092972
@@ -1145,7 +1147,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000015259, y: 104}
+  m_AnchoredPosition: {x: 0.000015259, y: -299}
   m_SizeDelta: {x: 280.1797, y: 189.6416}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1910810533
