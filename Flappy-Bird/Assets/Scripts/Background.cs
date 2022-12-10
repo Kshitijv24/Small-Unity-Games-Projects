@@ -5,6 +5,7 @@ public class Background : MonoBehaviour
     [SerializeField] Sprite[] backgrounds;
 
     SpriteRenderer spriteRenderer;
+    int nextBackground = 1;
 
 
     private void Start()
@@ -12,9 +13,14 @@ public class Background : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    private void Update()
+    public void ChangeBackground()
     {
-        int randomBackground = Random.Range(0, backgrounds.Length);
-        spriteRenderer.sprite = backgrounds[randomBackground];
+        spriteRenderer.sprite = backgrounds[nextBackground];
+        nextBackground++;
+
+        if(nextBackground == 6)
+        {
+            nextBackground = 0;
+        }
     }
 }
