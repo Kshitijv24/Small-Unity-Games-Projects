@@ -918,8 +918,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pillarPrefab:
-  - {fileID: 4988251328732022279, guid: 9e815d40198070242ae54819db3be20c, type: 3}
-  nextPillarSpawnDelay: 2
+  - {fileID: 696400038717666489, guid: 7890c294a8c96c541851cd143daba9eb, type: 3}
+  - {fileID: 7838651772762038582, guid: 5aea860cc6a19d04da03625e3b06ca41, type: 3}
+  - {fileID: 2746103357599794492, guid: ceec87ef3e56ed7408d334edcffbf839, type: 3}
+  - {fileID: 2067994798386761685, guid: 1e07bfabdf967574792987a232b7e083, type: 3}
+  - {fileID: 6272777050278761413, guid: 2500ca84f9166ea49957eca08d8e952e, type: 3}
+  - {fileID: 2522498911800569719, guid: 5a141ceb70824b447980cf208210e630, type: 3}
+  - {fileID: 599733352642419848, guid: cfe55916138dad74ead20e3fbd43202c, type: 3}
+  - {fileID: 8358209360243077968, guid: 14275fc95602f7a4ba34f0b97dac391e, type: 3}
+  nextPillarSpawnDelay: 3
 --- !u!4 &1408755043
 Transform:
   m_ObjectHideFlags: 0
