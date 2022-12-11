@@ -35,9 +35,43 @@ public class BirdMovement : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Big")
+        {
+            MakeBirdBig(collision);
+        }
+        else if(collision.gameObject.tag == "Small")
+        {
+            MakeBirdSmall(collision);
+        }
+        else if(collision.gameObject.tag == "Normal")
+        {
+            MakeBirdNormal(collision);
+        }
+    }
+
     private void GameEnd()
     {
         SceneManager.LoadScene(0);
         Pillars.moveSpeed = 2;
+    }
+
+    private void MakeBirdBig(Collider2D collision)
+    {
+        transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+        Destroy(collision.gameObject);
+    }
+
+    private void MakeBirdSmall(Collider2D collision)
+    {
+        transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        Destroy(collision.gameObject);
+    }
+
+    private void MakeBirdNormal(Collider2D collision)
+    {
+        transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        Destroy(collision.gameObject);
     }
 }
