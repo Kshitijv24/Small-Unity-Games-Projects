@@ -5,6 +5,13 @@ public class Pillars : MonoBehaviour
     public static float moveSpeed = 2;
     [SerializeField] float maxMoveSpeed = 6;
 
+    AudioSource audioSource;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     private void Update()
     {
         MovingPillarsLeft();
@@ -25,6 +32,7 @@ public class Pillars : MonoBehaviour
         if(collision.tag == "Bird")
         {
             FindObjectOfType<ScoreSystem>().IncrementScore();
+            audioSource.Play();
         }
     }
 }
