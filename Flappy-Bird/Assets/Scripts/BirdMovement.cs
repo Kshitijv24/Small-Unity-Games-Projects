@@ -14,7 +14,7 @@ public class BirdMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (Touchscreen.current.primaryTouch.press.isPressed)
         {
