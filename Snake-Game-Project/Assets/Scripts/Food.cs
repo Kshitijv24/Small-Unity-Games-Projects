@@ -4,10 +4,7 @@ public class Food : MonoBehaviour
 {
     [SerializeField] BoxCollider2D gridArea;
 
-    private void Start()
-    {
-        RandomizePosition();
-    }
+    private void Start() => RandomizePosition();
 
     private void RandomizePosition()
     {
@@ -22,8 +19,6 @@ public class Food : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Player")
-        {
             RandomizePosition();
-        }
     }
 }
