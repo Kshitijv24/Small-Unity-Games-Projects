@@ -25,7 +25,8 @@ public class GridManager : MonoBehaviour
 				BackgroundTile spawnedBackgroundTile = 
 					Instantiate(
 						backgroundTile[randomBackgroundTile], 
-						GetWorldPosition(x, y), Quaternion.identity, 
+						GetWorldPosition(x, y), 
+						Quaternion.identity, 
 						transform);
 
 				spawnedBackgroundTile.name = $"Tile ({x},{y})";
