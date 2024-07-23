@@ -1,16 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
-	[SerializeField] int width, height;
+    public static GridManager Instance { get; private set; }
+
+    public GameObject[,] allCandiesArray;
+    public int width, height;
+
 	[SerializeField] float cellSize;
 	[SerializeField] BackgroundTile[] backgroundTileArray;
     [SerializeField] GameObject[] candiesArray;
 
     BackgroundTile[,] allBackgroundTilesArray;
-    GameObject[,] allCandiesArray;
+
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+        {
+            Destroy(gameObject);
+            Debug.Log("There are more than one " + this.GetType() + " Instances", this);
+            return;
+        }
+    }
 
     private void Start() => GenerateGrid();
 
