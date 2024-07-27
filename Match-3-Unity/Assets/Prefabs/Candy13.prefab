@@ -143,3 +143,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bf088beee2a4bf4e87b72803f2deaf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  swipeAngle: 0
+  targetX: 0
+  targetY: 0
+  column: 0
+  row: 0
+  candeyType: 12
+  candeyMoveSpeed: 10
