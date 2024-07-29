@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Candey : MonoBehaviour
@@ -5,6 +6,7 @@ public class Candey : MonoBehaviour
     public float swipeAngle = 0;
     public int targetX, targetY;
     public int column, row;
+    public int previousColumn, previousRow;
     public CandeyType candeyType;
 
     [SerializeField] float candeyMoveSpeed = 10f;
@@ -25,6 +27,8 @@ public class Candey : MonoBehaviour
 
         row = targetY;
         column = targetX;
+        previousRow = row;
+        previousColumn = column;
     }
 
     private void Update()
@@ -34,6 +38,15 @@ public class Candey : MonoBehaviour
 
         MoveCandeyPices();
         HandleCandeyMatches();
+    }
+
+    private void OnMouseDown() => 
+        firstTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+    private void OnMouseUp()
+    {
+        finalTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        CalculateSwipeAngle();
     }
 
     private void MoveCandeyPices()
@@ -65,28 +78,9 @@ public class Candey : MonoBehaviour
         }
     }
 
-    private void OnMouseDown() => 
-        firstTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-    private void OnMouseUp()
-    {
-        finalTouchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        CalculateSwipeAngle();
-    }
-
-    private void CalculateSwipeAngle()
-    {
-        swipeAngle = Mathf.Atan2(
-            finalTouchPosition.y - firstTouchPosition.y,
-            finalTouchPosition.x - firstTouchPosition.x)
-            * 180 / Mathf.PI;
-
-        HandleSwipe();
-    }
-
     private void HandleSwipe()
     {
-        if(swipeAngle > -45 && swipeAngle <= 45 && column < GridManager.Instance.width - 1)
+        if (swipeAngle > -45 && swipeAngle <= 45 && column < GridManager.Instance.width - 1)
         {
             // Right Swipe Detected
             otherCandey = GridManager.Instance.allCandiesArray[column + 1, row];
@@ -114,6 +108,17 @@ public class Candey : MonoBehaviour
             otherCandey.GetComponent<Candey>().row += 1;
             row -= 1;
         }
+        StartCoroutine(CheckIfMovePossible());
+    }
+
+    private void CalculateSwipeAngle()
+    {
+        swipeAngle = Mathf.Atan2(
+            finalTouchPosition.y - firstTouchPosition.y,
+            finalTouchPosition.x - firstTouchPosition.x)
+            * 180 / Mathf.PI;
+
+        HandleSwipe();
     }
 
     private void HandleCandeyMatches()
@@ -157,6 +162,23 @@ public class Candey : MonoBehaviour
                 downCandey.GetComponent<Candey>().isMatched = true;
                 isMatched = true;
             }
+        }
+    }
+
+    public IEnumerator CheckIfMovePossible()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        if(otherCandey != null)
+        {
+            if(!isMatched && !otherCandey.GetComponent<Candey>().isMatched)
+            {
+                otherCandey.GetComponent<Candey>().row = row;
+                otherCandey.GetComponent<Candey>().column = column;
+                row = previousRow;
+                column = previousColumn;
+            }
+            otherCandey = null;
         }
     }
 }
