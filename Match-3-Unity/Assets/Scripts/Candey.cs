@@ -86,14 +86,14 @@ public class Candey : MonoBehaviour
 
     private void HandleSwipe()
     {
-        if(swipeAngle > -45 && swipeAngle <= 45 && column < GridManager.Instance.width)
+        if(swipeAngle > -45 && swipeAngle <= 45 && column < GridManager.Instance.width - 1)
         {
             // Right Swipe Detected
             otherCandey = GridManager.Instance.allCandiesArray[column + 1, row];
             otherCandey.GetComponent<Candey>().column -= 1;
             column += 1;
         }
-        else if (swipeAngle > 45 && swipeAngle <= 135 && row < GridManager.Instance.height)
+        else if (swipeAngle > 45 && swipeAngle <= 135 && row < GridManager.Instance.height - 1)
         {
             // Up Swipe Detected
             otherCandey = GridManager.Instance.allCandiesArray[column, row + 1];
