@@ -148,5 +148,8 @@ MonoBehaviour:
   targetY: 0
   column: 0
   row: 0
+  previousColumn: 0
+  previousRow: 0
   candeyType: 3
+  swipeResist: 0.5
   candeyMoveSpeed: 10

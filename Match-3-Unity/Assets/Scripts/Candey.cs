@@ -3,19 +3,20 @@ using UnityEngine;
 
 public class Candey : MonoBehaviour
 {
-    public float swipeAngle = 0;
-    public int targetX, targetY;
-    public int column, row;
-    public int previousColumn, previousRow;
-    public CandeyType candeyType;
-
+    [SerializeField] CandeyType candeyType;
     [SerializeField] float candeyMoveSpeed = 10f;
+
+    int targetX, targetY;
+    int column, row;
+    int previousColumn, previousRow;
+    float swipeAngle = 0;
+    float swipeResist = 0.5f;
+    bool isMatched;
 
     Vector2 firstTouchPosition;
     Vector2 finalTouchPosition;
     Vector2 tempPosition;
     GameObject otherCandey;
-    bool isMatched;
     SpriteRenderer spriteRenderer;
 
     private void Awake() => spriteRenderer = GetComponent<SpriteRenderer>();
@@ -113,12 +114,16 @@ public class Candey : MonoBehaviour
 
     private void CalculateSwipeAngle()
     {
-        swipeAngle = Mathf.Atan2(
+        if (Mathf.Abs(finalTouchPosition.y - firstTouchPosition.y) > swipeResist ||
+            Mathf.Abs(finalTouchPosition.x - firstTouchPosition.x) > swipeResist)
+        {
+            swipeAngle = Mathf.Atan2(
             finalTouchPosition.y - firstTouchPosition.y,
             finalTouchPosition.x - firstTouchPosition.x)
             * 180 / Mathf.PI;
 
-        HandleSwipe();
+            HandleSwipe();
+        }
     }
 
     private void HandleCandeyMatches()
