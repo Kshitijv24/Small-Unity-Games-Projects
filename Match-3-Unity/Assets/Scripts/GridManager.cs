@@ -86,7 +86,7 @@ public class GridManager : MonoBehaviour
     {
         if (column > 1 && row > 1)
         {
-            // Colums Check
+            // Colums Check or Checking left side of board
             if (candies2dArray[column - 1, row].GetComponent<Candey>().candeyType 
                 == candeyPiece.GetComponent<Candey>().candeyType &&
                 candies2dArray[column - 2, row].GetComponent<Candey>().candeyType 
@@ -94,7 +94,7 @@ public class GridManager : MonoBehaviour
             {
                 return true;
             }
-            // Row Check
+            // Row Check or Checking down side of board
             if (candies2dArray[column, row - 1].GetComponent<Candey>().candeyType
                 == candeyPiece.GetComponent<Candey>().candeyType &&
                 candies2dArray[column, row - 2].GetComponent<Candey>().candeyType
