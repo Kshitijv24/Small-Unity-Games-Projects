@@ -4,6 +4,8 @@ using UnityEngine;
 public class Candey : MonoBehaviour
 {
     public CandeyType candeyType;
+    
+    [HideInInspector] public bool isMatched;
 
     [SerializeField] float candeyMoveSpeed = 10f;
 
@@ -12,7 +14,6 @@ public class Candey : MonoBehaviour
     int previousColumn, previousRow;
     float swipeAngle = 0;
     float swipeResist = 0.5f;
-    bool isMatched;
 
     Vector2 firstTouchPosition;
     Vector2 finalTouchPosition;
@@ -65,7 +66,7 @@ public class Candey : MonoBehaviour
         {
             tempPosition = new Vector2(targetX, transform.position.y);
             transform.position = tempPosition;
-            GridManager.Instance.candies2dArray[column, row] = this.gameObject;
+            Board.Instance.allCandies2DArray[column, row] = this.gameObject;
         }
         if (Mathf.Abs(targetY - transform.position.y) > 0.1f)
         {
@@ -76,37 +77,37 @@ public class Candey : MonoBehaviour
         {
             tempPosition = new Vector2(transform.position.x, targetY);
             transform.position = tempPosition;
-            GridManager.Instance.candies2dArray[column, row] = this.gameObject;
+            Board.Instance.allCandies2DArray[column, row] = this.gameObject;
         }
     }
 
     private void HandleSwipe()
     {
-        if (swipeAngle > -45 && swipeAngle <= 45 && column < GridManager.Instance.width - 1)
+        if (swipeAngle > -45 && swipeAngle <= 45 && column < Board.Instance.width - 1)
         {
             // Right Swipe Detected
-            otherCandey = GridManager.Instance.candies2dArray[column + 1, row];
+            otherCandey = Board.Instance.allCandies2DArray[column + 1, row];
             otherCandey.GetComponent<Candey>().column -= 1;
             column += 1;
         }
-        else if (swipeAngle > 45 && swipeAngle <= 135 && row < GridManager.Instance.height - 1)
+        else if (swipeAngle > 45 && swipeAngle <= 135 && row < Board.Instance.height - 1)
         {
             // Up Swipe Detected
-            otherCandey = GridManager.Instance.candies2dArray[column, row + 1];
+            otherCandey = Board.Instance.allCandies2DArray[column, row + 1];
             otherCandey.GetComponent<Candey>().row -= 1;
             row += 1;
         }
         else if ((swipeAngle > 135 || swipeAngle <= -135) && column > 0)
         {
             // Left Swipe Detected
-            otherCandey = GridManager.Instance.candies2dArray[column - 1, row];
+            otherCandey = Board.Instance.allCandies2DArray[column - 1, row];
             otherCandey.GetComponent<Candey>().column += 1;
             column -= 1;
         }
         else if (swipeAngle < -45 && swipeAngle >= -135 && row > 0)
         {
             // Down Swipe Detected
-            otherCandey = GridManager.Instance.candies2dArray[column, row - 1];
+            otherCandey = Board.Instance.allCandies2DArray[column, row - 1];
             otherCandey.GetComponent<Candey>().row += 1;
             row -= 1;
         }
@@ -135,12 +136,12 @@ public class Candey : MonoBehaviour
 
     private void HorizontalMatches()
     {
-        if (column > 0 && column < GridManager.Instance.width - 1)
+        if (column > 0 && column < Board.Instance.width - 1)
         {
             // check left side of candey
-            GameObject leftCandey = GridManager.Instance.candies2dArray[column - 1, row];
+            GameObject leftCandey = Board.Instance.allCandies2DArray[column - 1, row];
             // check right side of candey
-            GameObject rightCandey = GridManager.Instance.candies2dArray[column + 1, row];
+            GameObject rightCandey = Board.Instance.allCandies2DArray[column + 1, row];
 
             if (leftCandey != null && rightCandey != null)
             {
@@ -157,12 +158,12 @@ public class Candey : MonoBehaviour
 
     private void VerticalMatches()
     {
-        if (row > 0 && row < GridManager.Instance.height - 1)
+        if (row > 0 && row < Board.Instance.height - 1)
         {
             // check up side of candey
-            GameObject upCandey = GridManager.Instance.candies2dArray[column, row + 1];
+            GameObject upCandey = Board.Instance.allCandies2DArray[column, row + 1];
             // check down side of candey
-            GameObject downCandey = GridManager.Instance.candies2dArray[column, row - 1];
+            GameObject downCandey = Board.Instance.allCandies2DArray[column, row - 1];
 
             if (upCandey != null && downCandey != null)
             {
@@ -189,6 +190,10 @@ public class Candey : MonoBehaviour
                 otherCandey.GetComponent<Candey>().column = column;
                 row = previousRow;
                 column = previousColumn;
+            }
+            else
+            {
+                Board.Instance.FindMatchesToBeDestroyed();
             }
             otherCandey = null;
         }

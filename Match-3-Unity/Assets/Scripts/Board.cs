@@ -1,17 +1,17 @@
 using UnityEngine;
 
-public class GridManager : MonoBehaviour
+public class Board : MonoBehaviour
 {
-    public static GridManager Instance { get; private set; }
+    public static Board Instance { get; private set; }
 
-    public GameObject[,] candies2dArray;
+    public GameObject[,] allCandies2DArray;
     public int width, height;
 
 	[SerializeField] float cellSize;
 	[SerializeField] BackgroundTile[] backgroundTileArray;
     [SerializeField] GameObject[] candiesArray;
 
-    BackgroundTile[,] allBackgroundTilesArray;
+    BackgroundTile[,] allBackgroundTiles2DArray;
     int maxIterations;
 
     private void Awake()
@@ -30,8 +30,8 @@ public class GridManager : MonoBehaviour
 
     private void GenerateGrid()
     {
-        allBackgroundTilesArray = new BackgroundTile[width, height];
-        candies2dArray = new GameObject[width, height];
+        allBackgroundTiles2DArray = new BackgroundTile[width, height];
+        allCandies2DArray = new GameObject[width, height];
 
         for (int x = 0; x < width; x++)
         {
@@ -77,7 +77,7 @@ public class GridManager : MonoBehaviour
                 transform);
 
         spawnedCandy.name = $"Candey ({x},{y})";
-        candies2dArray[x , y] = spawnedCandy;
+        allCandies2DArray[x , y] = spawnedCandy;
     }
 
     private Vector2 GetWorldPosition(int x, int y) => new Vector2(x, y) * cellSize;
@@ -87,17 +87,17 @@ public class GridManager : MonoBehaviour
         if (column > 1 && row > 1)
         {
             // Colums Check or Checking left side of board
-            if (candies2dArray[column - 1, row].GetComponent<Candey>().candeyType 
+            if (allCandies2DArray[column - 1, row].GetComponent<Candey>().candeyType 
                 == candeyPiece.GetComponent<Candey>().candeyType &&
-                candies2dArray[column - 2, row].GetComponent<Candey>().candeyType 
+                allCandies2DArray[column - 2, row].GetComponent<Candey>().candeyType 
                 == candeyPiece.GetComponent<Candey>().candeyType)
             {
                 return true;
             }
             // Row Check or Checking down side of board
-            if (candies2dArray[column, row - 1].GetComponent<Candey>().candeyType
+            if (allCandies2DArray[column, row - 1].GetComponent<Candey>().candeyType
                 == candeyPiece.GetComponent<Candey>().candeyType &&
-                candies2dArray[column, row - 2].GetComponent<Candey>().candeyType
+                allCandies2DArray[column, row - 2].GetComponent<Candey>().candeyType
                 == candeyPiece.GetComponent<Candey>().candeyType)
             {
                 return true;
@@ -107,9 +107,9 @@ public class GridManager : MonoBehaviour
         {
             if (row > 1)
             {
-                if (candies2dArray[column, row - 1].GetComponent<Candey>().candeyType
+                if (allCandies2DArray[column, row - 1].GetComponent<Candey>().candeyType
                 == candeyPiece.GetComponent<Candey>().candeyType &&
-                candies2dArray[column, row - 2].GetComponent<Candey>().candeyType
+                allCandies2DArray[column, row - 2].GetComponent<Candey>().candeyType
                 == candeyPiece.GetComponent<Candey>().candeyType)
                 {
                     return true;
@@ -117,9 +117,9 @@ public class GridManager : MonoBehaviour
             }
             if (column > 1)
             {
-                if (candies2dArray[column - 1, row].GetComponent<Candey>().candeyType
+                if (allCandies2DArray[column - 1, row].GetComponent<Candey>().candeyType
                 == candeyPiece.GetComponent<Candey>().candeyType &&
-                candies2dArray[column - 2, row].GetComponent<Candey>().candeyType
+                allCandies2DArray[column - 2, row].GetComponent<Candey>().candeyType
                 == candeyPiece.GetComponent<Candey>().candeyType)
                 {
                     return true;
@@ -127,5 +127,26 @@ public class GridManager : MonoBehaviour
             }
         }
         return false;
+    }
+
+    private void DestroyMatchesAt(int column, int row)
+    {
+        if (allCandies2DArray[column, row].GetComponent<Candey>().isMatched)
+        {
+            Destroy(allCandies2DArray[column, row]);
+            allCandies2DArray[column, row] = null;
+        }
+    }
+
+    public void FindMatchesToBeDestroyed()
+    {
+        for (int i = 0; i < width; i++)
+        {
+            for(int j = 0; j < height; j++)
+            {
+                if (allCandies2DArray[i, j] != null)
+                    DestroyMatchesAt(i, j);
+            }
+        }
     }
 }
