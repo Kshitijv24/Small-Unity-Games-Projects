@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Board : MonoBehaviour
@@ -141,12 +142,32 @@ public class Board : MonoBehaviour
     public void FindMatchesToBeDestroyed()
     {
         for (int i = 0; i < width; i++)
-        {
-            for(int j = 0; j < height; j++)
-            {
+            for (int j = 0; j < height; j++)
                 if (allCandies2DArray[i, j] != null)
                     DestroyMatchesAt(i, j);
+
+        StartCoroutine(CollapseCandeys());
+    }
+
+    private IEnumerator CollapseCandeys()
+    {
+        int emptySpaces = 0;
+
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                if (allCandies2DArray[i, j] == null)
+                    emptySpaces++;
+                else if (emptySpaces > 0)
+                {
+                    allCandies2DArray[i, j].GetComponent<Candey>().row -= emptySpaces;
+                    allCandies2DArray[i, j] = null;
+                }
             }
+            emptySpaces = 0;
         }
+
+        yield return new WaitForSeconds(0.4f);
     }
 }

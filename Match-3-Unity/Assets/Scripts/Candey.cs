@@ -6,11 +6,11 @@ public class Candey : MonoBehaviour
     public CandeyType candeyType;
     
     [HideInInspector] public bool isMatched;
+    [HideInInspector] public int column, row;
 
     [SerializeField] float candeyMoveSpeed = 10f;
 
     int targetX, targetY;
-    int column, row;
     int previousColumn, previousRow;
     float swipeAngle = 0;
     float swipeResist = 0.5f;
@@ -61,23 +61,27 @@ public class Candey : MonoBehaviour
         {
             tempPosition = new Vector2(targetX, transform.position.y);
             transform.position = Vector2.Lerp(transform.position, tempPosition, candeyMoveSpeed * Time.deltaTime);
+
+            if (Board.Instance.allCandies2DArray[column, row] != this.gameObject)
+                Board.Instance.allCandies2DArray[column, row] = this.gameObject;
         }
         else
         {
             tempPosition = new Vector2(targetX, transform.position.y);
             transform.position = tempPosition;
-            Board.Instance.allCandies2DArray[column, row] = this.gameObject;
         }
         if (Mathf.Abs(targetY - transform.position.y) > 0.1f)
         {
             tempPosition = new Vector2(transform.position.x, targetY);
             transform.position = Vector2.Lerp(transform.position, tempPosition, candeyMoveSpeed * Time.deltaTime);
+
+            if (Board.Instance.allCandies2DArray[column, row] != this.gameObject)
+                Board.Instance.allCandies2DArray[column, row] = this.gameObject;
         }
         else
         {
             tempPosition = new Vector2(transform.position.x, targetY);
             transform.position = tempPosition;
-            Board.Instance.allCandies2DArray[column, row] = this.gameObject;
         }
     }
 
