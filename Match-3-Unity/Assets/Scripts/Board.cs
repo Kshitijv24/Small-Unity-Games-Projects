@@ -167,7 +167,47 @@ public class Board : MonoBehaviour
             }
             emptySpaces = 0;
         }
-
         yield return new WaitForSeconds(0.4f);
+        StartCoroutine(RefillEmptySpacesInBoard());
+    }
+
+    private void RefillBoardAfterDestoryingACandey()
+    {
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                if (allCandies2DArray[i, j] == null)
+                {
+                    Vector2 tempPosition = new Vector2(i, j);
+                    int candeyToUse = Random.Range(0, candiesArray.Length);
+                    GameObject piece = Instantiate(candiesArray[candeyToUse], tempPosition, Quaternion.identity);
+                    allCandies2DArray[i, j] = piece;
+                }
+            }
+        }
+    }
+
+    private bool MatchesOnBoard()
+    {
+        for (int i = 0; i < width; i++)
+            for (int j = 0; j < height; j++)
+                if (allCandies2DArray[i, j] != null)
+                    if (allCandies2DArray[i, j].GetComponent<Candey>().isMatched)
+                        return true;
+
+        return false;
+    }
+
+    private IEnumerator RefillEmptySpacesInBoard()
+    {
+        RefillBoardAfterDestoryingACandey();
+        yield return new WaitForSeconds(0.5f);
+
+        while (MatchesOnBoard())
+        {
+            yield return new WaitForSeconds(0.5f);
+            FindMatchesToBeDestroyed();
+        }
     }
 }

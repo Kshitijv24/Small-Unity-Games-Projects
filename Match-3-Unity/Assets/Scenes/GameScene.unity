@@ -459,10 +459,6 @@ MonoBehaviour:
   - {fileID: 43593816605871772, guid: e560378950dd7c94c9f2632b19951516, type: 3}
   - {fileID: 2992546520596424192, guid: c3a5f1771a890724f9fd0000decdf891, type: 3}
   - {fileID: 2925954419440212925, guid: ea1744596931b2f4880a7594de5ed92c, type: 3}
-  - {fileID: 1177163176108303261, guid: 8cd4e752c79e75f4fa9e79d7c584e217, type: 3}
-  - {fileID: 1810806222943265221, guid: efa39eb0ca86e6e43a43d548b520ebe1, type: 3}
-  - {fileID: 4802055514112303839, guid: 8072c602862705b4bb6cf0e7d4f6d9c7, type: 3}
-  - {fileID: 464519722847207375, guid: aaaabdfcd820d9949af1cfe095dc0ef8, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
